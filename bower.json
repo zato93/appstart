@@ -1,5 +1,5 @@
 {
-  "name": "Landos bug Tracker",
+  "name": "App start",
   "authors": [
     "zato93 <zato93one@gmail.com>"
   ],
@@ -10,7 +10,7 @@
     "tracker"
   ],
   "license": "MIT",
-  "homepage": "bugs.landos.kz",
+  "homepage": "https://github.com/zato93/appstart",
   "private": true,
   "ignore": [
     "**/.*",
