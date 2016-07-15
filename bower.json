@@ -1,0 +1,27 @@
+{
+  "name": "Landos bug Tracker",
+  "authors": [
+    "zato93 <zato93one@gmail.com>"
+  ],
+  "description": "Bug tracking system",
+  "main": "index.html",
+  "keywords": [
+    "bug",
+    "tracker"
+  ],
+  "license": "MIT",
+  "homepage": "bugs.landos.kz",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.7",
+    "bootstrap": "^3.3.6",
+    "sweetalert": "^1.1.3"
+  }
+}
