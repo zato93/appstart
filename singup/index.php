@@ -3,22 +3,22 @@ session_start();
 if(isset($_SESSION["id"])&&$_SESSION["id"]!=0){
 	header("Location: ../");
 }
-$login_fail=false;
+
+
 include("../php/dbaccess.php");
-if(isset($_POST["email"]) && isset($_POST["password"])){
-	$found = db()->getRow("SELECT id,password FROM users WHERE email=?s",$_POST["email"]);
-	print_r($found);
-	if($found && isset($found["password"]) && isset($found["id"])){
-		if(password_verify($_POST["password"], $found["password"])){
-			$_SESSION["id"]=$found["id"];
-			header("Location: ../");
-		}
+if(isset($_POST["email"])&&isset($_POST["password"])){
+	echo 1;
+	$password_hash=password_hash($_POST["password"],PASSWORD_DEFAULT);
+
+	$result=db()->query("INSERT INTO users SET email=?s,password=?s",$_POST["email"], $password_hash);
+	$userid=db()->insertId();
+	if($result&&$userid){
+		$_SESSION["id"]=$userid;
+		header("Location: ../");
 	}
 } 
 
-if (isset($_POST["email"])){
-	$login_fail=true;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -47,14 +47,9 @@ if (isset($_POST["email"])){
 				</div>
 			</div>
 			<div class="panel-footer">
-				<input type="submit" class="btn btn-primary" value="Signin">
+				<input type="submit" class="btn btn-primary" value="Register">
 			</div>
 		</form>
-		<?php
-			if($login_fail){
-				echo '<div class="alert alert-danger" role="alert">Wrong email or password</div>';
-			}
-		?>
 	</div>
 	<div class="col-sm-3"></div>
 </body>
