@@ -36,19 +36,19 @@ if(isset($_POST["email"])&&isset($_POST["password"])){
 			}
 		?>
 		<br>
-		<form class="panel panel-default" action="./" type="post">
+		<form class="panel panel-default" action="./" method="post">
 			<div class="panel-body">
 				<div class="form-group">
 					<label>Email</label>
-					<input type="text" class="form-control" name="email" placeholder="Enter email"/>
+					<input type="text" class="form-control" name="email" placeholder="Enter email" value="<?php echo $_POST['email'];?>"/>
 				</div>
 				<div class="form-group">
 					<label>Password</label>
-					<input type="password" class="form-control" password="password" placeholder="Enter password"/>
+					<input type="password" class="form-control" password="password" placeholder="Enter password" value=""/>
 				</div>
 			</div>
 			<div class="panel-footer">
-				<div class="btn btn-primary">Signin</div>
+				<input type="submit" class="btn btn-primary" value="Signin">
 			</div>
 		</form>
 	</div>
