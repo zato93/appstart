@@ -6,14 +6,16 @@ if(isset($_SESSION["id"])&&$_SESSION["id"]!=0){
 $login_fail=false;
 include("../php/dbaccess.php");
 if(isset($_POST["email"])&&isset($_POST["password"])){
-	$found= db()->getRow("SELECT id,password FROM users WHERE email=?s",$_POST["email"]);
+	$found = db()->getRow("SELECT id,password FROM users WHERE email=?s",$_POST["email"]);
 	if($found && isset($found["password"]) && isset($found["id"])){
-		if(!password_verify($_POST["password"], $found["password"])){
-			$login_fail=true;
-		} else {
+		if(password_verify($_POST["password"], $found["password"])){
 			header("Location: ../");
 		}
 	}
+} 
+
+if (isset($_POST["email"])){
+	$login_fail=true;
 }
 ?>
 
@@ -30,17 +32,12 @@ if(isset($_POST["email"])&&isset($_POST["password"])){
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6">
 		<br>
-		<?php
-			if($login_fail){
-				echo '<div class="alert alert-danger" role="alert">Wrong email or password</div>';
-			}
-		?>
 		<br>
 		<form class="panel panel-default" action="./" method="post">
 			<div class="panel-body">
 				<div class="form-group">
 					<label>Email</label>
-					<input type="text" class="form-control" name="email" placeholder="Enter email" value="<?php echo $_POST['email'];?>"/>
+					<input type="text" class="form-control" name="email" placeholder="Enter email" value="<?php if(isset($_POST['email'])) echo $_POST['email'];?>"/>
 				</div>
 				<div class="form-group">
 					<label>Password</label>
@@ -51,6 +48,11 @@ if(isset($_POST["email"])&&isset($_POST["password"])){
 				<input type="submit" class="btn btn-primary" value="Signin">
 			</div>
 		</form>
+		<?php
+			if($login_fail){
+				echo '<div class="alert alert-danger" role="alert">Wrong email or password</div>';
+			}
+		?>
 	</div>
 	<div class="col-sm-3"></div>
 </body>
